@@ -27,11 +27,8 @@ from skimage.segmentation import watershed as skwatershed
 from skimage.feature import peak_local_max
 from skimage import measure
 import warnings
-from PySide2.QtCore import Signal, QObject
-
 
 warnings.filterwarnings("ignore")
-
 
 def median_filter(image, kernel_size):
     """
@@ -453,9 +450,6 @@ def cellcounting_param_optimizer(dirinfo, params):
 
     """
 
-    # Emit progress signal before starting the optimization
-    self.progress_updated.emit(0)
-    
     # Determines the manual and auto counts using preset Otsu threshold.
     images, params = image_preprocessing(dirinfo,params)
     count_output = cellcounter(
@@ -496,9 +490,6 @@ def cellcounting_param_optimizer(dirinfo, params):
         i-=1
     optimal_threshold = data['AutoCount_Thresh'][i+1]
 
-    # Emit progress signal after completing the optimization
-    self.progress_updated.emit(50)
-
     return optimal_diameter, optimal_threshold
 
 
@@ -529,8 +520,6 @@ def cellcounting_batch(dirinfo, channel, params, save_intensities=False):
             channel one file within the Ch1 subdirectory.
     """
 
-    # Emit progress signal before starting cell counting
-    self.progress_updated.emit(51)
 
     fnames = dirinfo['ch1_fnames']
     output = dirinfo['output_ch1']
@@ -575,9 +564,6 @@ def cellcounting_batch(dirinfo, channel, params, save_intensities=False):
 
 
     Ch1_Counts.to_csv(os.path.join(os.path.normpath(dirinfo['output']), "Ch1_Counts.csv"))
-
-    # Emit progress signal after completing cell counting
-    self.progress_updated.emit(100)
 
     return Ch1_Counts
 
