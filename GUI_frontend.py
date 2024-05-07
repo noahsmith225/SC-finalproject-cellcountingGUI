@@ -16,21 +16,34 @@ The main functionality includes:
 4. Displaying the processed data in a QTableView within the GUI.
 
 Explanation of Input Parameters:
-1. diam (diameter): Represents the diameter of objects to be analyzed in the images. It determines the minimum size of objects considered during cell analysis.
-2. particle_min (minimum size object): Defines the minimum size of particles or objects to be included in the analysis. Small particles below this size threshold are ignored.
-3. UseWatershed: A boolean parameter indicating whether to use watershed segmentation during image processing. When True, watershed segmentation is applied to improve the accuracy of cell segmentation.
+1. diam (diameter): Represents the diameter of objects to be analyzed in the images. It determines the minimum size of
+objects considered during cell analysis.
+2. particle_min (minimum size object): Defines the minimum size of particles or objects to be included in the analysis.
+ Small particles below this size threshold are ignored.
+3. UseWatershed: A boolean parameter indicating whether to use watershed segmentation during image processing.
+When True, watershed segmentation is applied to improve the accuracy of cell segmentation.
 
 Steps to follow to use the GUI:
 1. Run the code -> A pop-up window will appear with the GUI.
 2. Select an image directory.
 3. Select the minimum size object though the spin button, we recommend 0.5 for the provided image
 4. Set the watershed parameter value, by default TRUE, (we recommend this option)
-5. Click submit and wait for the cell analysis to finish. A message will be displayed on the command window indicating it.
+5. Click submit and wait for the cell analysis to finish. A message will be displayed on the command window indicating
+   it.
 6. Visualize the results on the GUI.
 
 RESULTS:
+The results displayed in the GUI provide insights into the cell analysis performed on the images. Each column represents
+a specific aspect of the analysis:
 
-
+- AutoCount_Thresh: Threshold value automatically determined for cell counting.
+- OTSU_Thresh: Threshold value calculated using Otsu's method for cell counting.
+- Manual_CellDiam: Diameter manually specified for cell counting.
+- Manual_Counts: Cell counts obtained through manual counting.
+- AutoCount_UseWatershed: Boolean indicating whether watershed segmentation was used during automatic cell counting.
+- AutoCount_Counts: Cell counts obtained through automatic counting.
+- AutoCount_AvgCellArea: Average area of cells calculated during automatic counting.
+- Acc_Manual_over_AutoCounts: Accuracy measure indicating the ratio of manual counts over automatic counts.
 
 """
 
