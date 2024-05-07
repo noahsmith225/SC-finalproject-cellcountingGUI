@@ -1,5 +1,5 @@
 """
-Lazor Project
+Final project - cell counting GUI
 
 Authors: Noah Daniel Smith, Valentina Matos Romero
 Last Modified May 6, 2024
@@ -21,13 +21,11 @@ import cv2
 import numpy as np
 import mahotas as mh
 import pandas as pd
-import holoviews as hv
 import scipy as sp
 from skimage import filters
 from skimage.segmentation import watershed as skwatershed
 from skimage.feature import peak_local_max
 from skimage import measure
-from contextlib import contextmanager
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -567,12 +565,12 @@ def cellcounting_batch(dirinfo, channel, params, save_intensities=False):
     return(Ch1_Counts)
 
 if __name__ == "__main__":
-    working_directory, particle_min, use_watershed = "/Users/noahsmith/Documents/Hopkins Documents/Courses/S24 Courses/Software Carpentry/Final Project/ref code cell counting ZachPenn github", 0.05, True #get input parameters from gui
+    working_directory, particle_min, use_watershed = "/Users/noahsmith/Documents/Hopkins Documents/Courses/S24 Courses/Software Carpentry/Final Project/ref code cell counting ZachPenn github", 0.2, True #get input parameters from gui
 
     # Populates dirinfo with paths to composite, mask, cell images, and an output container.
     dirinfo = {'main' : working_directory}
     dirinfo = getdirinfo(dirinfo)
-    params = {'diam' : 6,
+    params = {'diam' : 20,
               'particle_min' : particle_min,
               'UseWatershed' : True }
     
