@@ -1,5 +1,5 @@
 """
-Lazor Project
+Final Project - Development of a Python-based GUI for Interactive Cell Analysis and Quantification
 
 Authors: Noah Daniel Smith, Valentina Matos Romero
 Last Modified May 6, 2024
@@ -520,7 +520,7 @@ def cellcounting_batch(dirinfo, channel, params, save_intensities=False):
             channel one file within the Ch1 subdirectory.
     """
 
-
+    global Ch1_Counts
     fnames = dirinfo['ch1_fnames']
     output = dirinfo['output_ch1']
     diam = params['ch1_diam']
@@ -563,7 +563,7 @@ def cellcounting_batch(dirinfo, channel, params, save_intensities=False):
         })
 
 
-    Ch1_Counts.to_csv(os.path.join(os.path.normpath(dirinfo['output']), "Ch1_Counts.csv"))
+    # Ch1_Counts.to_csv(os.path.join(os.path.normpath(dirinfo['output']), "Ch1_Counts.csv"))
 
     return Ch1_Counts
 
