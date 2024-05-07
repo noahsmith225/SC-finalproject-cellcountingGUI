@@ -5,7 +5,9 @@ Authors: Valentina Matos Romero, Noah Daniel Smith
 Last Modified May 7, 2024
 
 Note:
-This script implements a Python-based GUI for interactive cell analysis and quantification. It utilizes PySide2 for the GUI framework and integrates functionality from the 'cell_counter_backend' module for image processing and analysis.
+This script implements a Python-based GUI for interactive cell analysis and quantification. It utilizes PySide2
+for the GUI framework and integrates functionality from the 'cell_counter_backend' module for image processing
+and analysis.
 
 The main functionality includes:
 1. Selecting an image directory.
