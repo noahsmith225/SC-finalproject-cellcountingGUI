@@ -21,14 +21,15 @@ import cv2
 import numpy as np
 import mahotas as mh
 import pandas as pd
-import holoviews as hv
 import scipy as sp
 from skimage import filters
 from skimage.segmentation import watershed as skwatershed
 from skimage.feature import peak_local_max
 from skimage import measure
-from contextlib import contextmanager
 import warnings
+from PySide2.QtCore import Signal, QObject
+
+
 warnings.filterwarnings("ignore")
 
 
@@ -449,7 +450,11 @@ def cellcounting_param_optimizer(dirinfo, params):
             An cell-picking threshold deemed 'optimal' by up in threshold by 10 until the
             automatic counts exceed manual counts. The penultimate threshold (before auto-counts
             exceed manual counts) is deemed optimal.
+
     """
+
+    # Emit progress signal before starting the optimization
+    self.progress_updated.emit(0)
     
     # Determines the manual and auto counts using preset Otsu threshold.
     images, params = image_preprocessing(dirinfo,params)
@@ -491,6 +496,9 @@ def cellcounting_param_optimizer(dirinfo, params):
         i-=1
     optimal_threshold = data['AutoCount_Thresh'][i+1]
 
+    # Emit progress signal after completing the optimization
+    self.progress_updated.emit(50)
+
     return optimal_diameter, optimal_threshold
 
 
@@ -518,8 +526,11 @@ def cellcounting_batch(dirinfo, channel, params, save_intensities=False):
 
         Ch1_Counts: *df*
             A pandas dataframe containing a summary of the counting performed on each
-            channel one file within the Ch1 subdirectory. 
+            channel one file within the Ch1 subdirectory.
     """
+
+    # Emit progress signal before starting cell counting
+    self.progress_updated.emit(51)
 
     fnames = dirinfo['ch1_fnames']
     output = dirinfo['output_ch1']
@@ -561,26 +572,31 @@ def cellcounting_batch(dirinfo, channel, params, save_intensities=False):
          'Ch1_Counts': counts,
          'Ch1_ROIsize': roi_size
         })
-        
-    
+
+
     Ch1_Counts.to_csv(os.path.join(os.path.normpath(dirinfo['output']), "Ch1_Counts.csv"))
-    return(Ch1_Counts)
 
-if __name__ == "__main__":
-    working_directory, particle_min, use_watershed = "/Users/noahsmith/Documents/Hopkins Documents/Courses/S24 Courses/Software Carpentry/Final Project/ref code cell counting ZachPenn github", 0.05, True #get input parameters from gui
+    # Emit progress signal after completing cell counting
+    self.progress_updated.emit(100)
 
-    # Populates dirinfo with paths to composite, mask, cell images, and an output container.
-    dirinfo = {'main' : working_directory}
-    dirinfo = getdirinfo(dirinfo)
-    params = {'diam' : 6,
-              'particle_min' : particle_min,
-              'UseWatershed' : True }
-    
-    #send input parameters to optimizer
-    optimal_diameter, optimal_threshold = cellcounting_param_optimizer(dirinfo, params)
-    params['ch1_diam'] = optimal_diameter
-    params['ch1_thresh'] = optimal_threshold
+    return Ch1_Counts
 
-    #send input parameters to counter
-    output = cellcounting_batch(dirinfo, "Ch1", params, save_intensities=True)
-    print(output)
+
+# if __name__ == "__main__":
+#     working_directory, particle_min, use_watershed = "/Users/noahsmith/Documents/Hopkins Documents/Courses/S24 Courses/Software Carpentry/Final Project/ref code cell counting ZachPenn github", 0.05, True #get input parameters from gui
+#
+#     # Populates dirinfo with paths to composite, mask, cell images, and an output container.
+#     dirinfo = {'main' : working_directory}
+#     dirinfo = getdirinfo(dirinfo)
+#     params = {'diam' : 6,
+#               'particle_min' : particle_min,
+#               'UseWatershed' : True }
+#
+#     #send input parameters to optimizer
+#     optimal_diameter, optimal_threshold = cellcounting_param_optimizer(dirinfo, params)
+#     params['ch1_diam'] = optimal_diameter
+#     params['ch1_thresh'] = optimal_threshold
+#
+#     #send input parameters to counter
+#     output = cellcounting_batch(dirinfo, "Ch1", params, save_intensities=True)
+#     print(output)
