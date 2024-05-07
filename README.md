@@ -12,7 +12,7 @@ In the backend, this script repairs deprecated code from the "CellCounting" repo
 The program relies on a specific subdirectory naming scheme as represented in the example **Template.zip**. A composite image to be used for optimizing parameters should be placed in the "Composite" subdirectory. A manually counted mask of that composite image (prepared by ImageJ or another method of your choice) should be placed in the "ManualCounts" subdirectory. Finally, all of the cell images that you wish to be counted should be placed in the "Ch1" subdirectory.
 
 ### Running the script
-As long as all the necessary packages and dependencies are downloaded the script can be run from any directory. Simply follow the GUI instructions to select a path for analysis, select a minimum particle size (we recommend 0.2), and decide whether or not to use Watershed segmentation (recommended). 
+As long as all the necessary packages and dependencies are downloaded the script can be run from any directory. Simply follow the GUI instructions to select a path for analysis, select a minimum particle size (we recommend 0.05, but this will depend on your composite image and the experimental images you're counting), and decide whether or not to use Watershed segmentation (recommended). 
 
 ### Getting your data
 The total autocounts from each data file will be presented on the GUI, and also saved as a .csv file under "SavedOutput/Ch1_Counts.csv." Individual cell intensities from each experimental data file will be saved under "SavedOutput/Ch1/filename_cellinfo.csv." If you are interested, the data from threshold optimization is also saved in "SavedOutput".
