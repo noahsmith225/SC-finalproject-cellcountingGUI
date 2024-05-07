@@ -561,24 +561,25 @@ def cellcounting_batch(dirinfo, channel, params, save_intensities=False):
         })
         
     
-    Ch1_Counts.to_csv(os.path.join(os.path.normpath(dirinfo['output']), "Ch1_Counts.csv"))
-    return(Ch1_Counts)
+    # Ch1_Counts.to_csv(os.path.join(os.path.normpath(dirinfo['output']), "Ch1_Counts.csv"))
 
-if __name__ == "__main__":
-    working_directory, particle_min, use_watershed = "/Users/noahsmith/Documents/Hopkins Documents/Courses/S24 Courses/Software Carpentry/Final Project/ref code cell counting ZachPenn github", 0.2, True #get input parameters from gui
+    return Ch1_Counts
 
-    # Populates dirinfo with paths to composite, mask, cell images, and an output container.
-    dirinfo = {'main' : working_directory}
-    dirinfo = getdirinfo(dirinfo)
-    params = {'diam' : 20,
-              'particle_min' : particle_min,
-              'UseWatershed' : True }
-    
-    #send input parameters to optimizer
-    optimal_diameter, optimal_threshold = cellcounting_param_optimizer(dirinfo, params)
-    params['ch1_diam'] = optimal_diameter
-    params['ch1_thresh'] = optimal_threshold
-
-    #send input parameters to counter
-    output = cellcounting_batch(dirinfo, "Ch1", params, save_intensities=True)
-    print(output)
+# if __name__ == "__main__":
+#     working_directory, particle_min, use_watershed = "/Users/noahsmith/Documents/Hopkins Documents/Courses/S24 Courses/Software Carpentry/Final Project/ref code cell counting ZachPenn github", 0.2, True #get input parameters from gui
+#
+#     # Populates dirinfo with paths to composite, mask, cell images, and an output container.
+#     dirinfo = {'main' : working_directory}
+#     dirinfo = getdirinfo(dirinfo)
+#     params = {'diam' : 20,
+#               'particle_min' : particle_min,
+#               'UseWatershed' : True }
+#
+#     #send input parameters to optimizer
+#     optimal_diameter, optimal_threshold = cellcounting_param_optimizer(dirinfo, params)
+#     params['ch1_diam'] = optimal_diameter
+#     params['ch1_thresh'] = optimal_threshold
+#
+#     #send input parameters to counter
+#     output = cellcounting_batch(dirinfo, "Ch1", params, save_intensities=True)
+#     print(output)
