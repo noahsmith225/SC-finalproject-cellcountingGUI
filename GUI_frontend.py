@@ -47,6 +47,7 @@ a specific aspect of the analysis:
 
 """
 
+
 from PySide2 import QtWidgets, QtCore
 from cell_counter_backend import getdirinfo, cellcounting_param_optimizer, cellcounting_batch
 import os

@@ -9,6 +9,7 @@ quantification. It sets up various widgets and layouts using PySide2's QtWidgets
 interface for users to input parameters and view results. The architecture of the code was created with QT designer.
 """
 
+
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
