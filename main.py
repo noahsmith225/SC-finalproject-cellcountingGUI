@@ -50,7 +50,7 @@ class Ui_MainWindow(object):
         self.sizeobject_SB.setObjectName(u"sizeobject_SB")  # Set the object name of the QDoubleSpinBox
         self.sizeobject_SB.setDecimals(2)  # Set the number of decimal places displayed to 1
         self.sizeobject_SB.setSingleStep(0.05)  # Set the step value when incrementing/decrementing to 0.1
-        self.sizeobject_SB.setValue(0.1)  # Set the initial value of the QDoubleSpinBox to 0.2
+        self.sizeobject_SB.setValue(0.5)  # Set the initial value of the QDoubleSpinBox to 0.2
 
         self.gridLayout.addWidget(self.sizeobject_SB, 0, 1, 1, 1)  # Add the sizeobject_SB widget to gridLayout
 
